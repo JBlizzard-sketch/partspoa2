@@ -1,0 +1,53 @@
+# Docker Compose for local development/testing
+version: '3.8'
+
+services:
+  # Next.js Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: partspoa-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${PGUSER:-postgres}:${PGPASSWORD:-postgres}@db:5432/${PGDATABASE:-partspoa}
+      - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=${PGUSER:-postgres}
+      - PGPASSWORD=${PGPASSWORD:-postgres}
+      - PGDATABASE=${PGDATABASE:-partspoa}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:5000}
+    depends_on:
+      - db
+    networks:
+      - partspoa-network
+
+  # PostgreSQL Database (for local development)
+  db:
+    image: postgres:15-alpine
+    container_name: partspoa-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${PGUSER:-postgres}
+      - POSTGRES_PASSWORD=${PGPASSWORD:-postgres}
+      - POSTGRES_DB=${PGDATABASE:-partspoa}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - partspoa-network
+
+networks:
+  partspoa-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
