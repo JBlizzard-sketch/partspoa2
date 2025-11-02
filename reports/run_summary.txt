@@ -1,0 +1,57 @@
+============================================================
+AUTO PARTS SCRAPING RUN SUMMARY
+============================================================
+Run Date: 2025-11-02 14:30:33
+
+Products Scraped Per Website:
+------------------------------------------------------------
+  PolishVenture                 :    21 products
+  OneStopAutoGarage             :    19 products
+  AutoXpress                    :     0 products
+  AutoPartsHub                  :     0 products
+  Spares.co.ke                  :     0 products
+  TOTAL                         :    40 products
+
+Products After Deduplication: 40
+
+Categories Detected:
+------------------------------------------------------------
+  Uncategorized                 :    16 products
+  Engine                        :     8 products
+  Brakes                        :     5 products
+  Suspension                    :     5 products
+  Filters                       :     2 products
+  Transmission                  :     2 products
+  Fluids                        :     1 products
+  Electrical                    :     1 products
+
+Vehicle Make Distribution:
+------------------------------------------------------------
+  Toyota                        :     4 products
+  Mitsubishi                    :     4 products
+  Hyundai                       :     3 products
+  Land Rover                    :     2 products
+  Mazda                         :     2 products
+  Dodge                         :     1 products
+  Volkswagen                    :     1 products
+  Kia                           :     1 products
+  Nissan                        :     1 products
+  Audi                          :     1 products
+  VW                            :     1 products
+
+Vehicle Information Extraction:
+------------------------------------------------------------
+  Products with Make detected:     21 (52.5%)
+  Products with Model detected:    10 (25.0%)
+  Products with Year detected:      5 (12.5%)
+  Products without detection:      19 (47.5%)
+
+Price Information:
+------------------------------------------------------------
+  Products with price:             40 (100.0%)
+  Average price:                KSH 0.00
+  Price range:                  KSH 0.00 - KSH 0.00
+
+============================================================
+END OF REPORT
+============================================================

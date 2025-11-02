@@ -1,0 +1,83 @@
+You are an Autonomous Web Scraping + Data Structuring Agent.
+
+Your job is to create a full project that automatically scrapes auto part product data from these 5 Kenyan online parts websites:
+
+1. https://polishventure.com/
+2. https://www.onestopautogarage.co.ke/
+3. https://auto-xpress.co.ke/
+4. https://autopartshub.co.ke/
+5. https://spares.co.ke/
+
+Scraping Requirements:
+- Extract ALL structured product information available on each site, including:
+  product name, price, category, brand, OEM/part numbers, fitment compatibility, vehicle make, vehicle model, engine size, model years, product description, product URL, image URLs, and any metadata fields unique to each site.
+- Do NOT download images. Store only the image URLs.
+- Handle pagination, category browsing, and variants.
+- Use Playwright when the site is dynamic, otherwise use requests + BeautifulSoup.
+- Avoid duplicates using product URL or name+SKU matching.
+
+Data Processing Requirements:
+- Normalize and clean product names (remove noise, standardize formats).
+- Auto-detect vehicle make/model/year from product descriptions using NLP.
+- Auto-group products into a well-structured hierarchy:
+  Make → Model → Model Year → Part Category → Brand → Store.
+
+- Include ANY extra unique attributes as dynamic columns.
+- Ensure the final dataset is **searchable and filterable** with no missing attribute losses.
+
+Output Requirements:
+- Save all scraped results into:
+  /data/raw/*.csv (per website)
+  /data/processed/combined_master.csv (merged dataset)
+  /data/processed/combined_master.json
+- Also generate /reports/run_summary.txt summarizing:
+  - number of products scraped per website
+  - categories detected
+  - number of products with make/model extracted vs undetected
+
+Filtering & Usability:
+- Create a small local interactive UI (Streamlit) called `view.py` that lets the user:
+  - Search products
+  - Filter by make, model, model year, price range, brand, supplier
+  - View product images (using the stored URLs)
+  - Export filtered data as CSV
+
+Project Structure Required:
+
+/scraper
+    scrape_polishventure.py
+    scrape_onestop.py
+    scrape_autoxpress.py
+    scrape_autopartshub.py
+    scrape_spares.py
+    __init__.py
+
+/data
+    /raw
+    /processed
+
+/utils
+    normalize_text.py
+    attribute_extraction.py
+    category_mapping.py
+    drive_upload.py
+
+scrape_all.py   ← master script to run all scrapers and merge data
+view.py         ← Streamlit interactive browser
+requirements.txt
+README.md
+
+Additional Behaviors:
+- Automatically install dependencies on first run.
+- Ask user to authenticate Google Drive ONCE, then store token.json and auto-upload processed files to:
+  Google Drive → /AutoPartsData → /YYYY-MM-DD/
+
+Final Goal:
+User only needs to run:
+    python scrape_all.py
+to refresh data,
+and:
+    python view.py
+to explore the data visually.
+
+Your output should be the entire project folder generated in the workspace, with complete code implementations and no placeholders.
